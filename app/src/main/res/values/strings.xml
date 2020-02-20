@@ -1,3 +1,4 @@
 <resources>
+    <string name="google_map_api_key">AIzaSyDBvjOLdQ-VSdwo3lPSkuweMjtAQr9eWEE</string>
     <string name="app_name">Companies_Maintances</string>
 </resources>
