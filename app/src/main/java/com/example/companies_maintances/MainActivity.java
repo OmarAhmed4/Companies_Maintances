@@ -2,8 +2,7 @@ package com.example.companies_maintances;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import android.view.LayoutInflater;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -11,23 +10,28 @@ import com.google.android.gms.common.GoogleApiAvailability;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnClickedInterface {
 
     private static final int ERROR_DIALOG_REQUEST =9001 ;
+    Main_Activity_Mvc main_activity_mvc;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        main_activity_mvc=new Main_Activity_Mvc(LayoutInflater.from(this),null);
+        setContentView(main_activity_mvc.getRootView());
 
-        Button map_Button=(Button)findViewById(R.id.map_Button);
+        main_activity_mvc.registerListener(this);
+
+        /*Button map_Button=(Button)findViewById(R.id.map_Button);
         map_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent (MainActivity.this,ActivityForMap.class);
-                startActivity(intent);
+            Intent intent=new Intent(getApplicationContext(),ActivityForMap.class);
+            startActivity(intent);
             }
-        });
+        });*/
 
         isItOk();
 
@@ -51,6 +55,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        main_activity_mvc.unRegisterListener(this);
 
+    }
 
+    @Override
+    public void onClickedMethod() {
+        Intent intent=new Intent(getApplicationContext(),ActivityForMap.class);
+        startActivity(intent);
+
+    }
 }// end of class

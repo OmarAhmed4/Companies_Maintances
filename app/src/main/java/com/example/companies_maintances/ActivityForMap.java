@@ -110,7 +110,7 @@ public class ActivityForMap extends AppCompatActivity {
                 if(isAvaliable)
                 {
                     getDeviceLocation();
-                    //mark my place 
+                    //mark my place ء
                     mMap.setMyLocationEnabled(true);
                     mMap.getUiSettings().setMyLocationButtonEnabled(false);
                 }
